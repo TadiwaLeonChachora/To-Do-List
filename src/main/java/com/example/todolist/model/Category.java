@@ -1,4 +1,4 @@
-package com.example.todolist.models;
+package com.example.todolist.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

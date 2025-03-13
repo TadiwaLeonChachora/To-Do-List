@@ -1,7 +1,6 @@
-package com.example.todolist.services;
+package com.example.todolist.service;
 
-import com.example.todolist.models.Todo;
-import com.example.todolist.repositories.CategoryRepo;
+import com.example.todolist.model.Todo;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +16,6 @@ public interface TodoService {
     public Todo updateTodo(Long id, Todo updatedTodo, Long categoryId);
 
     public void deleteTodo(Long id);
+
+    public List<Todo> getTodoWithReminderDueToday();
 }

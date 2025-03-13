@@ -1,12 +1,13 @@
-package com.example.todolist.services;
+package com.example.todolist.service;
 
-import com.example.todolist.models.Category;
-import com.example.todolist.models.Todo;
-import com.example.todolist.repositories.CategoryRepo;
-import com.example.todolist.repositories.TodoRepo;
+import com.example.todolist.model.Category;
+import com.example.todolist.model.Todo;
+import com.example.todolist.repo.CategoryRepo;
+import com.example.todolist.repo.TodoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public Optional<Todo> getTodoById(Long id) {
-        return todoRepo.findById(id);
+        return Optional.ofNullable(todoRepo.findById(id).orElseThrow(() -> new RuntimeException("Todo not found")));
     }
 
     @Override
@@ -51,7 +52,9 @@ public class TodoServiceImpl implements TodoService {
                 .orElseThrow(()-> new RuntimeException("Category not found"));
 
         existingTodo.setDescription(updatedTodo.getDescription());
-        existingTodo.setIsCompleted((updatedTodo.isCompleted()));
+        existingTodo.setCompleted((updatedTodo.isCompleted()));
+        existingTodo.setDueDate(updatedTodo.getDueDate());
+        existingTodo.setReminderDate(updatedTodo.getReminderDate());
         existingTodo.setCategory(category);
 
         return todoRepo.save(existingTodo);
@@ -60,5 +63,11 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public void deleteTodo(Long id) {
         todoRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Todo> getTodoWithReminderDueToday(){
+        LocalDate today = LocalDate.now();
+        return todoRepo.findByReminderDate(today);
     }
 }

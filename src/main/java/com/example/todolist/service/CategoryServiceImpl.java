@@ -1,7 +1,7 @@
-package com.example.todolist.services;
+package com.example.todolist.service;
 
-import com.example.todolist.models.Category;
-import com.example.todolist.repositories.CategoryRepo;
+import com.example.todolist.model.Category;
+import com.example.todolist.repo.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

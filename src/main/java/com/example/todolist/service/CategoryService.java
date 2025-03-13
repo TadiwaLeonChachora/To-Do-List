@@ -1,6 +1,6 @@
-package com.example.todolist.services;
+package com.example.todolist.service;
 
-import com.example.todolist.models.Category;
+import com.example.todolist.model.Category;
 
 import java.util.List;
 

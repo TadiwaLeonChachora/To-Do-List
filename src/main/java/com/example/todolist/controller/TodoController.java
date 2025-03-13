@@ -1,8 +1,7 @@
-package com.example.todolist.controllers;
+package com.example.todolist.controller;
 
-import com.example.todolist.models.Todo;
-import com.example.todolist.repositories.TodoRepo;
-import com.example.todolist.services.TodoService;
+import com.example.todolist.model.Todo;
+import com.example.todolist.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +41,7 @@ public class TodoController {
     public Todo createTodo(@RequestBody Todo todo, @RequestParam Long categoryId){
         return todoService.createTodo(todo, categoryId);
     }
-    //upadte an exisiting to do item by id
+    //update an existing to do item by id
     @PutMapping("/{id}")
     public ResponseEntity<Todo> updateTodo(@PathVariable Long id, @RequestBody Todo updatedTodo, @RequestParam Long categoryId){
         return ResponseEntity.ok(todoService.updateTodo(id, updatedTodo, categoryId));

@@ -1,7 +1,7 @@
-package com.example.todolist.controllers;
+package com.example.todolist.controller;
 
-import com.example.todolist.models.Category;
-import com.example.todolist.services.CategoryService;
+import com.example.todolist.model.Category;
+import com.example.todolist.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

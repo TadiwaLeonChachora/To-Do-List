@@ -1,15 +1,14 @@
-package com.example.todolist.models;
+package com.example.todolist.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 public class Todo {
 
     @Id
@@ -17,11 +16,21 @@ public class Todo {
     private Long id;
     private String description;
     private boolean isCompleted;
+    private LocalDate dueDate;
+    private LocalDate reminderDate;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    @ManyToOne
+    @JoinColumn(name= "user_id")
+    @JsonBackReference
+    private Users user;
+
+
+
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -43,8 +52,24 @@ public class Todo {
         return isCompleted;
     }
 
-    public void setIsCompleted(boolean isCompleted) {
-        this.isCompleted = isCompleted;
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public LocalDate getReminderDate() {
+        return reminderDate;
+    }
+
+    public void setReminderDate(LocalDate reminderDate) {
+        this.reminderDate = reminderDate;
     }
 
     public Category getCategory() {
@@ -53,5 +78,13 @@ public class Todo {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 }
